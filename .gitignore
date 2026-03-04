@@ -6,3 +6,14 @@ dataset/
 venv*/
 __pycache__/
 .streamlit/secrets.toml
+# Ignore large data & binaries
+data/*.pkl
+data/*.db
+data/*.sqlite
+dataset/
+venv*/
+__pycache__/
+*.pyc
+.streamlit/secrets.toml
+secrets.toml
+backup*/*
