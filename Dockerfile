@@ -1,22 +1,22 @@
 FROM python:3.11-slim-bookworm
 
-# Install minimal system deps for opencv + onnxruntime
+# Install system deps + execstack for patch
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1 \
     libstdc++6 \
     libgomp1 \
+    prelink \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working dir
 WORKDIR /app
 
-# Copy & install requirements first (cache layer)
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy your code
+# Patch the .so to clear executable stack flag
+RUN execstack -c /app/.venv/lib/python3.11/site-packages/onnxruntime/capi/onnxruntime_pybind11_state.cpython-311-x86_64-linux-gnu.so
+
 COPY . .
 
-# Run Streamlit
 EXPOSE 8501
 CMD ["streamlit", "run", "admin_app_embeddings.py", "--server.port=8501", "--server.address=0.0.0.0"]
