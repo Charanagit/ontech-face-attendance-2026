@@ -1,2 +1,7 @@
 libgl1
 libstdc++6
+libsm6
+libxext6
+libxrender1
+libx11-6
+libglib2.0-0t64   # the transitional package that works without old deps
