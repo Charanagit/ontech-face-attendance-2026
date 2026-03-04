@@ -1,7 +1,7 @@
 streamlit==1.38.0
 insightface==0.7.3
 onnxruntime==1.15.1
-opencv-python-headless==4.5.3.56   # this is the key ? avoids glib/gthread completely
+opencv-python-headless==4.5.5.64
 pillow-heif
 mediapipe==0.10.11
 pandas==2.2.3
